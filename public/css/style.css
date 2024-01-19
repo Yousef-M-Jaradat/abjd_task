@@ -1,4 +1,3 @@
-/* Common styles for all pages */
 body {
     font-family: 'Arial', sans-serif;
     background-color: #f8f9fa;
@@ -16,7 +15,8 @@ label {
     margin-right: 10px;
 }
 
-input, button {
+input,
+button {
     margin-bottom: 10px;
 }
 
@@ -28,9 +28,9 @@ input, button {
     background-color: #fff;
 }
 
-/* Dashboard-specific styles */
 h1 {
     color: #007bff;
+    align-items: center;
 }
 
 table {
@@ -39,7 +39,8 @@ table {
     border-collapse: collapse;
 }
 
-th, td {
+th,
+td {
     padding: 10px;
     text-align: left;
 }
@@ -59,32 +60,40 @@ button:hover {
     background-color: #0056b3;
 }
 
-/* Login-specific styles */
-h2 {
+h2.success {
     color: #28a745;
 }
 
-button {
+button.success {
     background-color: #28a745;
     color: #fff;
     transition: background-color 0.3s;
 }
 
-button:hover {
+button.success:hover {
     background-color: #218838;
 }
 
-/* Register-specific styles */
-h2 {
+h2.error {
     color: #dc3545;
 }
 
-button {
+button.error {
     background-color: #dc3545;
     color: #fff;
     transition: background-color 0.3s;
 }
 
-button:hover {
+button.error:hover {
     background-color: #c82333;
+}
+
+.center-buttons {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.btn-container {
+    display: flex;
+    justify-content: space-around;
 }

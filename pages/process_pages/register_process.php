@@ -6,11 +6,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $password = $_POST['password'];
     $email = $_POST['email'];
 
-    // Basic validation
     if (empty($username) || empty($password) || empty($email)) {
         echo "All fields are required!";
     } else {
-        // Perform registration (You should add more security measures here)
         $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
         $stmt = $conn->prepare("INSERT INTO users (username, password, email) VALUES (?, ?, ?)");

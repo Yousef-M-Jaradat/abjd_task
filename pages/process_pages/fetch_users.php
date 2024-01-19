@@ -1,7 +1,6 @@
 <?php
 require_once '../../database/connection.php';
 
-// Fetch users
 $result = $conn->query("SELECT * FROM users");
 
 if ($result->num_rows > 0) {

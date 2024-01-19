@@ -3,14 +3,12 @@ require_once '../../database/connection.php';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $newUsername = $_POST['newUsername'];
-    $newPassword = $_POST['newPassword']; // Add this line
+    $newPassword = $_POST['newPassword'];
     $newEmail = $_POST['newEmail'];
 
-    // Simple validation
     if (empty($newUsername) || empty($newPassword) || empty($newEmail)) {
         echo "All fields are required!";
     } else {
-        // Perform user addition
         $hashedPassword = password_hash($newPassword, PASSWORD_DEFAULT);
 
         $stmt = $conn->prepare("INSERT INTO users (username, password, email) VALUES (?, ?, ?)");

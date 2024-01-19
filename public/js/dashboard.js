@@ -133,6 +133,21 @@ function confirmUpdate() {
     });
 }
 
+function logout() {
+    // Call the logout script
+    $.ajax({
+        type: 'GET',
+        url: 'process_pages/logout_process.php', // Replace with the actual path to your logout script
+        success: function(response) {
+            // Redirect to the login page or handle the response as needed
+            location.reload(true);
+
+            window.location.href = 'login.html';
+        },
+    });
+}
+
+
 function cancelUpdate() {
     // Reset and hide the update form
     $("#updateUserForm")[0].reset();
