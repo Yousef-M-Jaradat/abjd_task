@@ -2,9 +2,9 @@ function loginUser() {
     var username = $("#username").val();
     var password = $("#password").val();
 
-    // Simple validation
+    // Simple client-side validation
     if (username === "" || password === "") {
-        alert("Both username and password are required!");
+        $("#loginErrorMessage").html("Both username and password are required!");
         return;
     }
 
@@ -16,8 +16,16 @@ function loginUser() {
             username: username,
             password: password,
         },
+        dataType: 'json',
         success: function (response) {
-            $("#response").html(response);
+            if (response.success) {
+                window.location.href = response.redirectUrl;
+            } else {
+                $("#loginErrorMessage").html(response.message);
+            }
+        },
+        error: function (xhr, status, error) {
+            console.error(xhr.responseText);
         }
     });
 }

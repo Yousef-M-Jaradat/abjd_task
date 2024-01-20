@@ -6,17 +6,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $updatedUsername = $_POST['updatedUsername'];
     $updatedPassword = $_POST['updatedPassword'];
     $updatedEmail = $_POST['updatedEmail'];
+    $updatedRole = $_POST['updatedRole'];
 
     if (empty($updatedUsername) || empty($updatedEmail)) {
         echo "Both updated username and email are required!";
     } else {
         if (!empty($updatedPassword)) {
-            $stmt = $conn->prepare("UPDATE users SET username = ?, email = ?, password = ? WHERE id = ?");
+            $stmt = $conn->prepare("UPDATE users SET username = ?, email = ?, password = ?, role = ? WHERE id = ?");
             $hashedPassword = password_hash($updatedPassword, PASSWORD_DEFAULT);
-            $stmt->bind_param("sssi", $updatedUsername, $updatedEmail, $hashedPassword, $userId);
+            $stmt->bind_param("ssssi", $updatedUsername, $updatedEmail, $hashedPassword, $updatedRole, $userId);
         } else {
-            $stmt = $conn->prepare("UPDATE users SET username = ?, email = ? WHERE id = ?");
-            $stmt->bind_param("ssi", $updatedUsername, $updatedEmail, $userId);
+            $stmt = $conn->prepare("UPDATE users SET username = ?, email = ?, role = ? WHERE id = ?");
+            $stmt->bind_param("sssi", $updatedUsername, $updatedEmail, $updatedRole, $userId);
         }
 
         if ($stmt->execute()) {
@@ -30,3 +31,4 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 }
 
 $conn->close();
+?>

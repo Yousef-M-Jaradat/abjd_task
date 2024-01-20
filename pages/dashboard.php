@@ -2,7 +2,7 @@
 session_start();
 
 if (!isset($_SESSION['user_id'])) {
-    header("Location: login.html");
+    header("Location: login.php");
     exit();
 }
 
@@ -47,6 +47,19 @@ require './layout/navbar.php';
                             <input type="email" class="form-control" id="newEmail" name="newEmail" required>
                         </div>
 
+                        <div class="form-group">
+                            <label>Role:</label>
+                            <div class="form-check">
+                                <input type="radio" class="form-check-input" id="adminRole" name="newRole" value="admin">
+                                <label class="form-check-label" for="adminRole">Admin</label>
+                            </div>
+                            <div class="form-check">
+                                <input type="radio" class="form-check-input" id="customerRole" name="newRole" value="customer">
+                                <label class="form-check-label" for="customerRole">Customer</label>
+                            </div>
+                        </div>
+
+
                         <button type="button" class="btn btn-primary" onclick="addUser()">Add User</button>
                     </form>
                 </div>
@@ -57,11 +70,12 @@ require './layout/navbar.php';
     <table class="table" id="userTable">
         <thead>
             <tr>
-                <th>ID</th>
+                <th>NO.</th>
                 <th>Username</th>
                 <th>Email</th>
                 <th>Password</th>
-                <th>Action</th>
+                <th>Role</th>
+                <th colspan="2" class="text-center">Action</th>
             </tr>
         </thead>
         <tbody>
@@ -94,6 +108,15 @@ require './layout/navbar.php';
                             <label for="updatedEmail">Updated Email:</label>
                             <input type="email" class="form-control" id="updatedEmail" name="updatedEmail" required>
                         </div>
+
+                        <div class="form-group">
+                            <label for="updatedRole">Updated Role:</label>
+                            <select class="form-control" id="updatedRole" name="updatedRole" required>
+                                <option value="admin">Admin</option>
+                                <option value="customer">Customer</option>
+                            </select>
+                        </div>
+
 
                         <button type="button" class="btn btn-success" onclick="confirmUpdate()">Update User</button>
                         <button type="button" class="btn btn-secondary" onclick="cancelUpdate()">Cancel</button>

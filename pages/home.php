@@ -2,7 +2,7 @@
 session_start();
 
 if (!isset($_SESSION['user_id'])) {
-    header("Location: login.html");
+    header("Location: login.php");
     exit();
 }
 
@@ -17,9 +17,9 @@ require './layout/navbar.php';
 
     <div class="center-buttons">
         <div class="btn-container">
-            <a href="login.html" class="btn btn-primary">Login</a>
+            <a href="login.php" class="btn btn-primary">Login</a>
 
-            <a href="register.html" class="btn btn-success">Register</a>
+            <a href="register.php" class="btn btn-success">Register</a>
         </div>
     </div>
 </div>

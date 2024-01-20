@@ -29,9 +29,7 @@ button {
 }
 
 h1 {
-    color: #007bff;
-    align-items: center;
-}
+text-align: center;}
 
 table {
     margin-top: 20px;
@@ -46,7 +44,7 @@ td {
 }
 
 th {
-    background-color: #007bff;
+    background-color: #032E48;
     color: #fff;
 }
 
@@ -96,4 +94,14 @@ button.error:hover {
 .btn-container {
     display: flex;
     justify-content: space-around;
+}
+.card-header{
+    background-color: #EC2027;
+}
+.btn-block{
+    background-color: #032E48;
+    color: white;
+}
+.navbar{
+    background-color: #032E48;
 }

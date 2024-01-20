@@ -1,4 +1,3 @@
-// dashboard.js
 
 $(document).ready(function() {
     // Initial data load
@@ -32,10 +31,11 @@ function addUser() {
     var newUsername = $("#newUsername").val();
     var newEmail = $("#newEmail").val();
     var newPassword = $("#newPassword").val();
+    var newRole = $("input[name='newRole']:checked").val(); // Get the selected role
 
     // Simple validation
-    if (newUsername === "" || newEmail === "") {
-        alert("Both username and email are required!");
+    if (newUsername === "" || newEmail === "" || newPassword === "" || newRole === undefined) {
+        alert("All fields are required!");
         return;
     }
 
@@ -46,7 +46,8 @@ function addUser() {
         data: {
             newUsername: newUsername,
             newEmail: newEmail,
-            newPassword: newPassword
+            newPassword: newPassword,
+            newRole: newRole
         },
         success: function(response) {
             // Hide the "Add User" form
@@ -66,6 +67,7 @@ function addUser() {
     });
 }
 
+
 function deleteUser(userId) {
     if (confirm("Are you sure you want to delete this user?")) {
         $.ajax({
@@ -83,7 +85,6 @@ function deleteUser(userId) {
 }
 
 function updateUser(userId) {
-    // Fetch user data for the selected user
     $.ajax({
         type: 'POST',
         url: 'process_pages/get_user.php',
@@ -93,29 +94,31 @@ function updateUser(userId) {
         success: function(response) {
             var user = JSON.parse(response);
 
-            // Populate the update form with user data
             $("#userIdToUpdate").val(user.id);
             $("#updatedUsername").val(user.username);
             $("#updatedEmail").val(user.email);
-            $("#updatedPassword").val(""); // Clear the password field
+            $("#updatedRole").val(user.role);
+            $("#updatedPassword").val("");
             $("#updateUserModal").modal('show');
         }
     });
 }
+
 
 function confirmUpdate() {
     var userId = $("#userIdToUpdate").val();
     var updatedUsername = $("#updatedUsername").val();
     var updatedPassword = $("#updatedPassword").val();
     var updatedEmail = $("#updatedEmail").val();
+    var updatedRole = $("#updatedRole").val(); 
 
-    // Simple validation
-    if (updatedUsername === "" || updatedEmail === "") {
-        alert("Both updated username and email are required!");
+    console.log(updatedRole);
+
+    if (updatedUsername === "" || updatedEmail === "" || updatedRole === null) {
+        alert("Updated username, email, and role are required!");
         return;
     }
 
-    // Ajax request to update user
     $.ajax({
         type: 'POST',
         url: 'process_pages/update_user.php',
@@ -123,26 +126,26 @@ function confirmUpdate() {
             userId: userId,
             updatedUsername: updatedUsername,
             updatedPassword: updatedPassword,
-            updatedEmail: updatedEmail
+            updatedEmail: updatedEmail,
+            updatedRole: updatedRole 
         },
         success: function(response) {
             showSuccessPopup(response);
-            fetchUsers(); // Refresh the user table
-            cancelUpdate(); // Hide the update form
+            fetchUsers(); 
+            cancelUpdate(); 
         }
     });
 }
 
+
 function logout() {
-    // Call the logout script
     $.ajax({
         type: 'GET',
-        url: 'process_pages/logout_process.php', // Replace with the actual path to your logout script
+        url: 'process_pages/logout_process.php',
         success: function(response) {
-            // Redirect to the login page or handle the response as needed
             location.reload(true);
 
-            window.location.href = 'login.html';
+            window.location.href = 'login.php';
         },
     });
 }
